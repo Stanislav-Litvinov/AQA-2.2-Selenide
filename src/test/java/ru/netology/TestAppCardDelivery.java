@@ -45,8 +45,18 @@ public class TestAppCardDelivery {
     }
 
     @Test
-    public void shouldTestValidDate() {
+    public void shouldTestValidationDateField() {
         $("[data-test-id='city'] input").val("Казань");
+        $("[data-test-id='name'] input").val("Сергей Коржов");
+        $("[data-test-id='phone'] input").val("+79000000000");
+        $("[data-test-id='agreement']").click();
+        $(".button").click();
+        $("[data-test-id='date'] .input__sub").shouldHave(text("Неверно введена дата"));
+    }
+    @Test
+    public void shouldTestNotValidDate() {
+        $("[data-test-id='city'] input").val("Казань");
+        $("[data-test-id='date'] input").sendKeys("32.13.0000");
         $("[data-test-id='name'] input").val("Сергей Коржов");
         $("[data-test-id='phone'] input").val("+79000000000");
         $("[data-test-id='agreement']").click();
